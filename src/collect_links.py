@@ -16,6 +16,7 @@ BASE = "https://moden-coding.github.io/scrape-practice-site/catalog/"
 
 
 def fetch_and_save(url, path):
+    """Download the page at url, save it to path, and return the status code."""
     resp = requests.get(url, timeout=20)
     resp.encoding = "utf-8"
     with open(path, "w", encoding="utf-8") as f:
@@ -24,6 +25,7 @@ def fetch_and_save(url, path):
 
 
 def load_soup(path):
+    """Open a saved HTML file and return it as a BeautifulSoup object."""
     with open(path, encoding="utf-8") as f:
         return BeautifulSoup(f.read(), "html.parser")
 
@@ -42,6 +44,7 @@ def game_urls(soup):
 
 
 def main():
+    """Fetch catalog page 1, save it, and print how many page and game URLs were found."""
     status = fetch_and_save(BASE + "page-1.html", "page-1.html")
     print("Status:", status)
     soup = load_soup("page-1.html")
